@@ -1,17 +1,22 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private float speed = 3f;
+
+    [SerializeField]
+    private float mouseSensitivityX = 3f;
+
+    [SerializeField]
+    private float mouseSensitivityY = 3f;
 
     private PlayerMotor motor;
 
     void Start()
     {
-        // automaticaly sets motor to the PlayerMotor component
+        // Automaticaly sets motor to the PlayerMotor component
         motor = GetComponent<PlayerMotor>();
     }
 
@@ -25,6 +30,22 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVertical = transform.forward * zMov;
 
         Vector3 velocity = (moveHorizontal + moveVertical).normalized * speed;
+
+        motor.Move(velocity);
+
+        // Calculate player rotation
+        float yRot = Input.GetAxisRaw("Mouse X");
+
+        Vector3 rotation = new Vector3(0, yRot, 0) * mouseSensitivityX;
+
+        motor.Rotate(rotation);
+
+        // Calculate camera rotation
+        float xRot = Input.GetAxisRaw("Mouse Y");
+
+        Vector3 cameraRotation = new Vector3(xRot, 0, 0) * mouseSensitivityY;
+
+        motor.RotateCamera(cameraRotation);
     }
 }
  
