@@ -808,6 +808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b1102b35439c5139b3423fdb0667ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  matchSettings:
+    respawnTimer: 3
 --- !u!4 &1558239674
 Transform:
   m_ObjectHideFlags: 0

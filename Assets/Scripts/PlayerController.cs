@@ -3,6 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(ConfigurableJoint))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private PlayerMotor motor;
     private ConfigurableJoint joint;
 
+    private Animator animator;
+
     void Start()
     {
         // Automaticaly sets motor to the PlayerMotor component
@@ -37,18 +40,23 @@ public class PlayerController : MonoBehaviour
 
         // Set default value for the ConfigurableJoint
         SetJointSettings(jointSpring);
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         // Calculate player velocity
-        float xMov = Input.GetAxisRaw("Horizontal");
-        float zMov = Input.GetAxisRaw("Vertical");
+        float xMov = Input.GetAxis("Horizontal");
+        float zMov = Input.GetAxis("Vertical");
 
         Vector3 moveHorizontal = transform.right * xMov;
         Vector3 moveVertical = transform.forward * zMov;
 
-        Vector3 velocity = (moveHorizontal + moveVertical).normalized * speed;
+        Vector3 velocity = (moveHorizontal + moveVertical) * speed;
+
+        // Play thruster animations
+        animator.SetFloat("ForwardVelocity", zMov);
 
         // Apply movement
         motor.Move(velocity);
