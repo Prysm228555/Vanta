@@ -255,7 +255,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -786,6 +786,9 @@ MonoBehaviour:
   - {fileID: -2403631074855093829}
   - {fileID: 8999249990219052955}
   remoteLayerName: RemotePlayer
+  dontDrawLayerName: DontDraw
+  playerGraphics: {fileID: 6949548566108786746}
+  playerUIPrefab: {fileID: 8657033825299472423, guid: e5624713f936e5dc586481269a0eeb42, type: 3}
 --- !u!114 &6793006383140121322
 MonoBehaviour:
   m_ObjectHideFlags: 0
